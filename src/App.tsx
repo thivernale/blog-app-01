@@ -1,11 +1,11 @@
 import './App.css';
-import { BackgroundWithColorToggles } from './components/BackgroundWithColorToggles.tsx';
+import { PasswordGenerator } from './components/PasswordGenerator.tsx';
 
 function App() {
 
   return (
     <>
-      <BackgroundWithColorToggles />
+      <PasswordGenerator />
     </>
   );
 }
