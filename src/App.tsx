@@ -1,10 +1,8 @@
-import { CurrencyConverter } from './components/CurrencyConverter.tsx';
-
 function App() {
 
   return (
     <>
-      <CurrencyConverter />
+      APP HOME
     </>
   );
 }
