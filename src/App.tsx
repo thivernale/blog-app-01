@@ -1,11 +1,10 @@
-import './App.css';
-import { PasswordGenerator } from './components/PasswordGenerator.tsx';
+import { CurrencyConverter } from './components/CurrencyConverter.tsx';
 
 function App() {
 
   return (
     <>
-      <PasswordGenerator />
+      <CurrencyConverter />
     </>
   );
 }

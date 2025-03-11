@@ -18,6 +18,7 @@ export function BackgroundWithColorToggles() {
               className="outline-none px-4 py-1 rounded-full shadow-lg text-black capitalize"
               style={{ backgroundColor: buttonColor }}
               onClick={() => setColor(buttonColor)}
+              key={buttonColor}
             >
               {buttonColor}
             </button>
