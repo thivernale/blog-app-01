@@ -86,7 +86,7 @@ export function CurrencyConverter() {
 
   return (
     <div
-      className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
+      className="w-full grow flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
       style={{
         backgroundImage: `url(https://images.pexels.com/photos/6120216/pexels-photo-6120216.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)`,
       }}

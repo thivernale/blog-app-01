@@ -6,7 +6,7 @@ export function BackgroundWithColorToggles() {
 
   return (
     <div
-      className="w-full h-screen duration-200"
+      className="w-full grow duration-200"
       style={{ backgroundColor: color }}
     >
       <div className="fixed top-28 flex flex-wrap justify-center inset-x-0 px-2">
