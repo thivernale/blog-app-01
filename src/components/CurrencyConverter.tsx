@@ -1,5 +1,5 @@
-import { useCurrencyInfo } from '../hooks/useCurrencyInfo.tsx';
 import { useId, useState } from 'react';
+import { useCurrencyInfo } from '../hooks/useCurrencyInfo';
 
 type Props = {
   label?: string,

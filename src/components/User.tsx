@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useUserContext } from '../contexts/UserContext.ts';
+import { useUserContext } from '../contexts/UserContext';
 
 export function User() {
   const { user } = useParams<{ user: string }>();

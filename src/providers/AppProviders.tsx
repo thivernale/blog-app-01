@@ -1,6 +1,6 @@
 import { createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
-import { UserContextProvider } from '../contexts/UserContextProvider.tsx';
-import { routes } from './routes.tsx';
+import { UserContextProvider } from '../contexts/UserContextProvider';
+import { routes } from './routes';
 
 export function AppProviders() {
 

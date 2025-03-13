@@ -1,13 +1,13 @@
 import { Route } from 'react-router-dom';
-import { Layout } from '../Layout.tsx';
-import App from '../App.tsx';
-import { Login } from '../components/Login.tsx';
-import { BackgroundWithColorToggles } from '../components/BackgroundWithColorToggles.tsx';
-import { PasswordGenerator } from '../components/PasswordGenerator.tsx';
-import { CurrencyConverter } from '../components/CurrencyConverter.tsx';
-import { About } from '../components/About.tsx';
-import { User } from '../components/User.tsx';
-import { Github, githubInfoLoader } from '../components/Github.tsx';
+import { Layout } from '../Layout';
+import App from '../App';
+import { Login } from '../components/Login';
+import { BackgroundWithColorToggles } from '../components/BackgroundWithColorToggles';
+import { PasswordGenerator } from '../components/PasswordGenerator';
+import { CurrencyConverter } from '../components/CurrencyConverter';
+import { About } from '../components/About';
+import { User } from '../components/User';
+import { Github, githubInfoLoader } from '../components/Github';
 
 export const routes = (
   <Route path="/" element={<Layout />}>

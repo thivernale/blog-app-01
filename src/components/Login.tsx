@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { useUserContext } from '../contexts/UserContext.ts';
-import { ThemeToggle } from './ThemeToggle.tsx';
-import { ThemeProvider } from '../contexts/ThemeContext.ts';
+import { useUserContext } from '../contexts/UserContext';
+import { ThemeToggle } from './ThemeToggle';
+import { ThemeProvider } from '../contexts/ThemeContext';
 
 export function Login() {
   const [username, setUsername] = useState('');
