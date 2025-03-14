@@ -8,6 +8,7 @@ import { CurrencyConverter } from '../components/CurrencyConverter';
 import { About } from '../components/About';
 import { User } from '../components/User';
 import { Github, githubInfoLoader } from '../components/Github';
+import { TodoApp } from '../pages/todos/components/TodoApp';
 
 export const routes = (
   <Route path="/" element={<Layout />}>
@@ -21,6 +22,7 @@ export const routes = (
       <Route path=":user" element={<User />} />
     </Route>
     <Route path="github" element={<Github />} loader={githubInfoLoader} />
+    <Route path="todos" element={<TodoApp />} />
     <Route path="*" element={<div>Not Found</div>} />
   </Route>
 );
@@ -32,4 +34,5 @@ export const links: { path: string, label: string }[] = [
   { path: 'currency-converter', label: 'Currency Converter' },
   { path: 'user/anonymous', label: 'User' },
   { path: 'github', label: 'Github' },
+  { path: 'todos', label: 'Todos' },
 ];
