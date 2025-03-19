@@ -1,5 +1,5 @@
 import { Account, Client, ID } from 'appwrite';
-import { env } from '../config/env';
+import { environment } from '../config/environment';
 
 export class AuthService {
   private readonly client: Client;
@@ -7,18 +7,9 @@ export class AuthService {
 
   constructor() {
     this.client = new Client()
-      .setEndpoint(env.REACT_APP_APPWRITE_URL)
-      .setProject(env.REACT_APP_APPWRITE_PROJECT_ID);
+      .setEndpoint(environment().REACT_APP_APPWRITE_URL)
+      .setProject(environment().REACT_APP_APPWRITE_PROJECT_ID);
     this.account = new Account(this.client);
-  }
-
-  private static _instance: AuthService;
-
-  static get instance(): AuthService {
-    if (!AuthService._instance) {
-      AuthService._instance = new AuthService();
-    }
-    return AuthService._instance;
   }
 
   async createAccount({ name, password, email }: UserRegistration) {
@@ -68,4 +59,6 @@ export class AuthService {
 type UserCredentials = { email: string; password: string };
 type UserRegistration = UserCredentials & { name: string };
 
-export default AuthService.instance;
+const authService = new AuthService();
+
+export default authService;
