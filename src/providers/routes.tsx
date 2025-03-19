@@ -9,6 +9,7 @@ import { About } from '../components/About';
 import { User } from '../components/User';
 import { Github, githubInfoLoader } from '../components/Github';
 import { TodoApp } from '../pages/todos/components/TodoApp';
+import NameSearch from '../pages/name-search/components/NameSearch';
 
 export const routes = (
   <Route path="/" element={<Layout />}>
@@ -23,11 +24,12 @@ export const routes = (
     </Route>
     <Route path="github" element={<Github />} loader={githubInfoLoader} />
     <Route path="todos" element={<TodoApp />} />
+    <Route path="name-search" element={<NameSearch />} />
     <Route path="*" element={<div>Not Found</div>} />
   </Route>
 );
 
-export const links: { path: string, label: string }[] = [
+export const links: { path: string; label: string }[] = [
   { path: '', label: 'Home' },
   { path: 'background-color', label: 'Background Color Toggle' },
   { path: 'password-generator', label: 'Password Generator' },
@@ -35,4 +37,5 @@ export const links: { path: string, label: string }[] = [
   { path: 'user/anonymous', label: 'User' },
   { path: 'github', label: 'Github' },
   { path: 'todos', label: 'Todos' },
+  { path: 'name-search', label: 'Name Search' },
 ];
