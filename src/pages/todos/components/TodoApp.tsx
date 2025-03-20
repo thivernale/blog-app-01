@@ -7,19 +7,30 @@ export function TodoApp() {
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const todoOps: Omit<TodoOps, 'todos'> = {
-    addTodo: t => setTodos((prevState) => [{ id: Date.now(), ...t }, ...prevState]),
+    addTodo: (t) =>
+      setTodos((prevState) => [{ id: Date.now(), ...t }, ...prevState]),
     updateTodo: (id, t) => {
-      setTodos((prevState) => [...prevState.map(value => value.id === id ? { ...value, ...t } : value)]);
-    },
-    removeTodo: id => {
-      setTodos((prevState) => [...prevState.filter(value => value.id !== id)]);
-    },
-    toggleCompleteTodo: id => {
       setTodos((prevState) => [
-        ...prevState.map(value => value.id === id ? {
-          ...value,
-          complete: !value.complete,
-        } : value),
+        ...prevState.map((value) =>
+          value.id === id ? { ...value, ...t } : value,
+        ),
+      ]);
+    },
+    removeTodo: (id) => {
+      setTodos((prevState) => [
+        ...prevState.filter((value) => value.id !== id),
+      ]);
+    },
+    toggleCompleteTodo: (id) => {
+      setTodos((prevState) => [
+        ...prevState.map((value) =>
+          value.id === id
+            ? {
+                ...value,
+                complete: !value.complete,
+              }
+            : value,
+        ),
       ]);
     },
   };

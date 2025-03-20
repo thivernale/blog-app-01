@@ -38,7 +38,7 @@ export function TodoForm() {
         className="grow border px-3 py-1.5 outline-none duration-200 rounded-l-lg"
         placeholder="Add todo"
         value={todo.text}
-        onChange={e => updateTodoForm(e.currentTarget)}
+        onChange={(e) => updateTodoForm(e.currentTarget)}
         autoComplete="off"
       />
       <input
@@ -46,7 +46,7 @@ export function TodoForm() {
         name="due"
         className="w-1/3 border px-3 py-1.5 outline-none duration-200"
         value={todo.due}
-        onChange={e => updateTodoForm(e.currentTarget)}
+        onChange={(e) => updateTodoForm(e.currentTarget)}
       />
       <button
         type="submit"

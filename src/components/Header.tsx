@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { links } from '../providers/routes';
-import { useUserContext } from '../contexts/UserContext.ts';
+import { useUserContext } from '../contexts/UserContext';
 
 export function Header() {
   const { user: contextUser, setUser } = useUserContext();
@@ -48,7 +48,11 @@ export function Header() {
               {links.map(({ path, label }) => (
                 <li key={path}>
                   <NavLink
-                    to={path.startsWith('user/') && contextUser ? `user/${contextUser.username}` : path}
+                    to={
+                      path.startsWith('user/') && contextUser
+                        ? `user/${contextUser.username}`
+                        : path
+                    }
                     className={({ isActive }) =>
                       `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0 ${isActive ? 'text-orange-700' : 'text-gray-700'}`
                     }

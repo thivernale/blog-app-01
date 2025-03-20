@@ -2,60 +2,74 @@ import { useId, useState } from 'react';
 import { useCurrencyInfo } from '../hooks/useCurrencyInfo';
 
 type Props = {
-  label?: string,
-  amount?: number,
-  onAmountChange?: (e: number) => void,
-  onCurrencyChange?: (e: string) => void,
-  currencyOptions: string[],
-  selectedCurrency?: string,
-  amountReadonly?: boolean,
-  currencyReadonly?: boolean,
-  className?: string
+  label?: string;
+  amount?: number;
+  onAmountChange?: (e: number) => void;
+  onCurrencyChange?: (e: string) => void;
+  currencyOptions: string[];
+  selectedCurrency?: string;
+  amountReadonly?: boolean;
+  currencyReadonly?: boolean;
+  className?: string;
 };
 
-function CurrencyInputBox(
-  {
-    label,
-    amount = 0,
-    onAmountChange,
-    onCurrencyChange,
-    currencyOptions = [],
-    selectedCurrency = 'usd',
-    amountReadonly = false,
-    currencyReadonly = false,
-    className = '',
-  }: Props) {
-
+function CurrencyInputBox({
+  label,
+  amount = 0,
+  onAmountChange,
+  onCurrencyChange,
+  currencyOptions = [],
+  selectedCurrency = 'usd',
+  amountReadonly = false,
+  currencyReadonly = false,
+  className = '',
+}: Props) {
   const amountId = useId();
   const currencyId = useId();
 
   return (
-    <div className={`bg-white dark:bg-gray-800 p-3 rounded-lg text-sm flex ${className}`}>
+    <div
+      className={`bg-white dark:bg-gray-800 p-3 rounded-lg text-sm flex ${className}`}
+    >
       <div className="w-1/2">
-        <label className="text-black/40 dark:text-gray-400 mb-2 inline-block" htmlFor={amountId}>{label}</label>
+        <label
+          className="text-black/40 dark:text-gray-400 mb-2 inline-block"
+          htmlFor={amountId}
+        >
+          {label}
+        </label>
         <input
           type="number"
           name="amount"
           id={amountId}
           value={amount}
           disabled={amountReadonly}
-          onChange={e => onAmountChange && onAmountChange(Number(e.target.value))}
+          onChange={(e) =>
+            onAmountChange && onAmountChange(Number(e.target.value))
+          }
           className="outline-none w-full bg-transparent py-1.5"
           autoComplete="off"
         />
       </div>
       <div className="w-1/2 flex flex-wrap justify-end text-right">
-        <label className="text-black/40 dark:text-gray-400 mb-2 w-full" htmlFor={currencyId}>Currency Type</label>
+        <label
+          className="text-black/40 dark:text-gray-400 mb-2 w-full"
+          htmlFor={currencyId}
+        >
+          Currency Type
+        </label>
         <select
           name="currency"
           id={currencyId}
           value={selectedCurrency}
           disabled={currencyReadonly}
-          onChange={e => onCurrencyChange && onCurrencyChange(e.target.value)}
+          onChange={(e) => onCurrencyChange && onCurrencyChange(e.target.value)}
           className="rounded-lg px-1 py-1 bg-gray-100 dark:bg-gray-800 cursor-pointer outline-none"
         >
-          {currencyOptions.map(opt => (
-            <option key={opt} value={opt}>{opt}</option>
+          {currencyOptions.map((opt) => (
+            <option key={opt} value={opt}>
+              {opt}
+            </option>
           ))}
         </select>
       </div>
@@ -64,7 +78,6 @@ function CurrencyInputBox(
 }
 
 export function CurrencyConverter() {
-
   const [from, setFrom] = useState('usd');
   const [to, setTo] = useState('usd');
   const [fromAmount, setFromAmount] = useState(0);
@@ -92,11 +105,9 @@ export function CurrencyConverter() {
       }}
     >
       <div className="w-full">
-        <div
-          className="w-full max-w-md mx-auto border border-gray-600 rounded-lg p-5 backdrop-blur-sm bg-white/30"
-        >
+        <div className="w-full max-w-md mx-auto border border-gray-600 rounded-lg p-5 backdrop-blur-sm bg-white/30">
           <form
-            onSubmit={e => {
+            onSubmit={(e) => {
               e.preventDefault();
               convert();
             }}

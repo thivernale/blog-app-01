@@ -6,7 +6,7 @@ export function TodoList() {
 
   return (
     <div className="flex flex-col w-2xl">
-      {todos.map(todo => (
+      {todos.map((todo) => (
         <TodoItem todo={todo} key={todo.id} />
       ))}
     </div>

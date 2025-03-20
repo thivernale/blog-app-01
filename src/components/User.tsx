@@ -7,7 +7,8 @@ export function User() {
 
   return (
     <div className="text-center">
-      Route Params User: {user ?? 'not set'}<br />
+      Route Params User: {user ?? 'not set'}
+      <br />
       Context User: {contextUser?.username ?? 'not set'}
     </div>
   );

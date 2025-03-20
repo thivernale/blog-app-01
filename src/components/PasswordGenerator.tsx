@@ -37,7 +37,9 @@ export function PasswordGenerator() {
 
   return (
     <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 bg-gray-800 text-orange-500">
-      <h1 className="text-xl mb-2 text-center text-white my-3">Password Generator</h1>
+      <h1 className="text-xl mb-2 text-center text-white my-3">
+        Password Generator
+      </h1>
 
       <div className="flex shadow rounded-lg mb-4 overflow-hidden">
         <input
@@ -65,7 +67,7 @@ export function PasswordGenerator() {
             value={length}
             name="length"
             className="cursor-pointer"
-            onChange={event => setLength(parseInt(event.target.value))}
+            onChange={(event) => setLength(parseInt(event.target.value))}
           />
           <label htmlFor="length">Length: {length}</label>
         </div>
@@ -74,8 +76,9 @@ export function PasswordGenerator() {
             <input
               type="checkbox"
               defaultChecked={includeNumbers}
-              onChange={() => setIncludeNumbers(prevState => !prevState)}
-            />{' '}Numbers
+              onChange={() => setIncludeNumbers((prevState) => !prevState)}
+            />{' '}
+            Numbers
           </label>
         </div>
         <div className="flex items-center gap-x-1">
@@ -83,8 +86,9 @@ export function PasswordGenerator() {
             <input
               type="checkbox"
               defaultChecked={includeCharacters}
-              onChange={() => setIncludeCharacters(prevState => !prevState)}
-            />{' '}Characters
+              onChange={() => setIncludeCharacters((prevState) => !prevState)}
+            />{' '}
+            Characters
           </label>
         </div>
       </div>

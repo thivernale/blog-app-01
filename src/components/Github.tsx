@@ -18,8 +18,7 @@ export function Github() {
 
   return (
     <div className="text-center bg-gray-600 m-4 text-white p-4 text-3xl">
-      Github
-      followers {data.followers as string}
+      Github followers {data.followers as string}
       <img src={data.avatar_url as string} alt="" width={300} />
     </div>
   );

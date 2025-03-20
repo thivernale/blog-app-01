@@ -22,9 +22,7 @@ export function Login() {
 
   return (
     <ThemeProvider value={[theme, setTheme]}>
-      <div
-        className="w-full flex flex-col gap-3 flex-wrap justify-center items-center dark:bg-gray-600 dark:text-white "
-      >
+      <div className="w-full flex flex-col gap-3 flex-wrap justify-center items-center dark:bg-gray-600 dark:text-white ">
         <div className="p-2 justify-end w-md flex flex-wrap">
           <ThemeToggle />
         </div>
@@ -37,19 +35,17 @@ export function Login() {
             type="text"
             className="outline-gray-300 dark:outline-white outline-1 p-2 w-1/2"
             value={username}
-            onChange={e => setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             placeholder="Username"
           />
           <input
             type="password"
             className="outline-gray-300 dark:outline-white outline-1 p-2 w-1/2"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-          <button
-            className="outline-gray-300 dark:outline-white outline-1 p-2 w-1/2"
-          >
+          <button className="outline-gray-300 dark:outline-white outline-1 p-2 w-1/2">
             Submit
           </button>
         </form>

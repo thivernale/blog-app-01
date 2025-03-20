@@ -49,7 +49,7 @@ export function TodoItem({ todo: oldTodo }: { todo: Todo }) {
         placeholder="Specify todo"
         readOnly={!editable}
         value={todo.text}
-        onChange={e => updateTodoForm(e.currentTarget)}
+        onChange={(e) => updateTodoForm(e.currentTarget)}
         autoComplete="off"
       />
       <input
@@ -58,7 +58,7 @@ export function TodoItem({ todo: oldTodo }: { todo: Todo }) {
         className={`w-1/3 px-3 py-1.5 outline-none duration-200 ${editable ? 'border' : ''}`}
         readOnly={!editable}
         value={todo.due}
-        onChange={e => updateTodoForm(e.currentTarget)}
+        onChange={(e) => updateTodoForm(e.currentTarget)}
       />
       <button
         type="submit"
