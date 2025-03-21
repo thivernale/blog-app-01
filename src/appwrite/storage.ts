@@ -115,7 +115,10 @@ export class StorageService {
   }
 }
 
-type Post = {
+export const storageService = StorageService.instance;
+
+export type Post = {
+  $id?: string;
   title: string;
   content: string;
   featuredImage?: string;
