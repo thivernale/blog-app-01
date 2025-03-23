@@ -64,6 +64,11 @@ export const routes = (
   </Route>
 );
 
-export const links: { path: string; label: string }[] = [
-  { path: '', label: 'Home' },
-];
+type NavItemParams = { path: string; label: string; active: boolean };
+export const getNavItemParams = (isAuthenticated: boolean) =>
+  [
+    { path: '', label: 'Home', active: true },
+    { path: '/login', label: 'Login', active: !isAuthenticated },
+    { path: '/signup', label: 'Signup', active: !isAuthenticated },
+    { path: '/posts', label: 'All Posts', active: isAuthenticated },
+  ] as NavItemParams[];

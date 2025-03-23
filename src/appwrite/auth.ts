@@ -71,4 +71,4 @@ export class AuthService {
 type UserCredentials = { email: string; password: string };
 type UserRegistration = UserCredentials & { name: string };
 
-export default AuthService.instance;
+export const authService = AuthService.instance;
