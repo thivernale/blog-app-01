@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export type AuthState = { authenticated: boolean; userData: unknown };
+type UserData = {
+  $id: string;
+} | null;
+export type AuthState = { authenticated: boolean; userData: UserData };
 
 const initialState: AuthState = { authenticated: false, userData: null };
 
@@ -19,6 +22,7 @@ export const authSlice = createSlice({
   },
   selectors: {
     authenticated: (state) => state.authenticated,
+    userData: (state) => state.userData,
   },
 });
 

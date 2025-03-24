@@ -50,12 +50,13 @@ export class StorageService {
     }
   }
 
-  async createPost(slug: string, data: Post) {
+  async createPost(post: Post) {
+    const { slug, ...data } = post;
     try {
       return await this.databases.createDocument(
         StorageService.DATABASE_ID,
         StorageService.COLLECTION_ID,
-        slug,
+        slug as string,
         data,
       );
     } catch (e) {
@@ -63,7 +64,9 @@ export class StorageService {
     }
   }
 
-  async updatePost(slug: string, data: Post) {
+  async updatePost(slug: string, post: Post) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { $id, userId, slug: s, ...data } = post;
     try {
       return await this.databases.updateDocument(
         StorageService.DATABASE_ID,
@@ -119,6 +122,7 @@ export const storageService = StorageService.instance;
 
 export type Post = {
   $id?: string;
+  slug?: string;
   title: string;
   content: string;
   featuredImage?: string;
