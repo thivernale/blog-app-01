@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Models } from 'appwrite';
 
-type UserData = {
-  $id: string;
-} | null;
-export type AuthState = { authenticated: boolean; userData: UserData };
+export type AuthState = {
+  authenticated: boolean;
+  userData: Models.User<Models.Preferences> | null;
+};
 
 const initialState: AuthState = { authenticated: false, userData: null };
 
@@ -11,7 +12,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<AuthState>) => {
+    login: (state, action: PayloadAction<Omit<AuthState, 'authenticated'>>) => {
       state.authenticated = true;
       state.userData = action.payload.userData;
     },
