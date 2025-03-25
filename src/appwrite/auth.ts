@@ -7,8 +7,8 @@ export class AuthService {
 
   constructor() {
     this.client = new Client()
-      .setEndpoint(env.REACT_APP_APPWRITE_URL)
-      .setProject(env.REACT_APP_APPWRITE_PROJECT_ID);
+      .setEndpoint(env.VITE_APPWRITE_URL)
+      .setProject(env.VITE_APPWRITE_PROJECT_ID);
     this.account = new Account(this.client);
   }
 
@@ -68,7 +68,7 @@ export class AuthService {
   }
 }
 
-type UserCredentials = { email: string; password: string };
-type UserRegistration = UserCredentials & { name: string };
+export type UserCredentials = { email: string; password: string };
+export type UserRegistration = UserCredentials & { name: string };
 
 export const authService = AuthService.instance;

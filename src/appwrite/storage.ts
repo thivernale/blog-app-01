@@ -2,17 +2,17 @@ import { Client, Databases, ID, Query, Storage } from 'appwrite';
 import { env } from '../config/env';
 
 export class StorageService {
-  private static readonly DATABASE_ID = env.REACT_APP_APPWRITE_DATABASE_ID;
-  private static readonly COLLECTION_ID = env.REACT_APP_APPWRITE_COLLECTION_ID;
-  private static readonly BUCKET_ID = env.REACT_APP_APPWRITE_BUCKET_ID;
+  private static readonly DATABASE_ID = env.VITE_APPWRITE_DATABASE_ID;
+  private static readonly COLLECTION_ID = env.VITE_APPWRITE_COLLECTION_ID;
+  private static readonly BUCKET_ID = env.VITE_APPWRITE_BUCKET_ID;
   private readonly client: Client;
   private databases: Databases;
   private storage: Storage;
 
   constructor() {
     this.client = new Client()
-      .setEndpoint(env.REACT_APP_APPWRITE_URL)
-      .setProject(env.REACT_APP_APPWRITE_PROJECT_ID);
+      .setEndpoint(env.VITE_APPWRITE_URL)
+      .setProject(env.VITE_APPWRITE_PROJECT_ID);
     this.databases = new Databases(this.client);
     this.storage = new Storage(this.client);
   }
