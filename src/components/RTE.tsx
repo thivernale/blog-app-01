@@ -1,5 +1,6 @@
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import { Editor } from '@tinymce/tinymce-react';
+import { env } from '../config/env';
 
 type Props<T extends FieldValues> = {
   name: Path<T>;
@@ -22,6 +23,7 @@ export function RTE<T extends FieldValues>({
         control={control}
         render={({ field: { onChange } }) => (
           <Editor
+            apiKey={env.VITE_TINYMCE_API_KEY}
             onEditorChange={onChange}
             initialValue={defaultValue}
             init={{

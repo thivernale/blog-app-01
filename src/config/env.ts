@@ -6,6 +6,7 @@ const environmentSchema = z.object({
   VITE_APPWRITE_DATABASE_ID: z.string().min(1),
   VITE_APPWRITE_COLLECTION_ID: z.string().min(1),
   VITE_APPWRITE_BUCKET_ID: z.string().min(1),
+  VITE_TINYMCE_API_KEY: z.string().min(20),
 });
 
 let env: z.infer<typeof environmentSchema>;
