@@ -6,15 +6,21 @@ import { Post, storageService } from '../../appwrite/storage';
 import { authSlice } from '../../store/authSlice';
 import { Input } from '../Input';
 import { RTE } from '../RTE';
-import { Select } from '../Select';
 import { Button } from '../Button';
 
 type PostWithFile = Post & { image: FileList };
 
-export function PostForm({ post }: { post: Post }) {
+export function PostForm({ post }: { post?: Post }) {
+  const slugTransform = useCallback((value: string) => {
+    if (value) {
+      return value.trim().toLowerCase().replace(/\W+/g, '-');
+    }
+    return '';
+  }, []);
+
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm<PostWithFile>({
-      defaultValues: { ...post },
+      defaultValues: { ...post, slug: slugTransform(post?.title || '') },
     });
 
   const navigate = useNavigate();
@@ -24,6 +30,8 @@ export function PostForm({ post }: { post: Post }) {
     const { image, ...postData } = data;
     const file = image[0] ? await storageService.uploadFile(image[0]) : null;
 
+    postData.active = Boolean(postData.active);
+
     if (post) {
       if (file && post.featuredImage) {
         await storageService.deleteFile(post.featuredImage);
@@ -31,7 +39,7 @@ export function PostForm({ post }: { post: Post }) {
 
       const savedPost = await storageService.updatePost(post.$id!, {
         ...postData,
-        featuredImage: file?.$id || undefined,
+        featuredImage: file?.$id || post.featuredImage,
       });
 
       if (savedPost) {
@@ -49,13 +57,6 @@ export function PostForm({ post }: { post: Post }) {
       }
     }
   };
-
-  const slugTransform = useCallback((value: string) => {
-    if (value) {
-      return value.trim().toLowerCase().replace(/\W+/g, '-');
-    }
-    return '';
-  }, []);
 
   useEffect(() => {
     watch((value, { name }) => {
@@ -116,18 +117,18 @@ export function PostForm({ post }: { post: Post }) {
           type="checkbox"
           defaultChecked={true}
           className="mb-4"
-          {...register('active', { required: true })}
+          {...register('active', {})}
         />
-        <Select
+        {/*<Select
           options={['active', 'inactive']}
           label="Status"
           className="mb-4"
           {...register('active', { required: true })}
-        />
+        />*/}
         <Button
           className="w-full"
           type="submit"
-          bgColor={post ? 'bg-green-500' : ''}
+          bgColor={post ? 'bg-green-500' : undefined}
         >
           {post ? 'Update' : 'Create'}
         </Button>

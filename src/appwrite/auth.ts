@@ -30,7 +30,7 @@ export class AuthService {
         password,
         name,
       );
-      if (!userAccount) {
+      if (userAccount) {
         return this.login({ email, password });
       } else {
         throw new Error('Account not created');

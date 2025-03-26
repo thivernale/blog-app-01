@@ -35,7 +35,7 @@ export function LoginForm() {
       <div className="mx-auto w-full max-w-lg rounded-lg border border-black/10 bg-gray-100 p-10 dark:bg-gray-600">
         <div className="mb-2 flex justify-center">
           <span className="inline-block w-full max-w-[100px]">
-            <Logo width="100%" />
+            <Logo width="100px" />
           </span>
         </div>
         <h2 className="text-center text-2xl leading-tight font-bold">

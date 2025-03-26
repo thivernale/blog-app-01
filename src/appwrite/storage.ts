@@ -1,5 +1,16 @@
-import { Client, Databases, ID, Query, Storage } from 'appwrite';
+import { Client, Databases, ID, Models, Query, Storage } from 'appwrite';
 import { env } from '../config/env';
+
+type PostResponse = Models.Document & Post;
+export type Post = {
+  $id?: string;
+  slug?: string;
+  title: string;
+  content: string;
+  featuredImage?: string;
+  active?: boolean;
+  userId?: string;
+};
 
 export class StorageService {
   private static readonly DATABASE_ID = env.VITE_APPWRITE_DATABASE_ID;
@@ -28,10 +39,12 @@ export class StorageService {
 
   async getPost(slug: string) {
     try {
-      return await this.databases.getDocument(
-        StorageService.DATABASE_ID,
-        StorageService.COLLECTION_ID,
-        slug,
+      return this.stripPost(
+        await this.databases.getDocument<PostResponse>(
+          StorageService.DATABASE_ID,
+          StorageService.COLLECTION_ID,
+          slug,
+        ),
       );
     } catch (e) {
       console.error('Appwrite service getPost()', e);
@@ -40,11 +53,13 @@ export class StorageService {
 
   async getPosts(queries: string[] = [Query.equal('active', true)]) {
     try {
-      return await this.databases.listDocuments(
-        StorageService.DATABASE_ID,
-        StorageService.COLLECTION_ID,
-        queries,
-      );
+      return (
+        await this.databases.listDocuments<PostResponse>(
+          StorageService.DATABASE_ID,
+          StorageService.COLLECTION_ID,
+          queries,
+        )
+      ).documents.map((document) => this.stripPost(document));
     } catch (e) {
       console.error('Appwrite service getPosts()', e);
     }
@@ -53,11 +68,13 @@ export class StorageService {
   async createPost(post: Post) {
     const { slug, ...data } = post;
     try {
-      return await this.databases.createDocument(
-        StorageService.DATABASE_ID,
-        StorageService.COLLECTION_ID,
-        slug as string,
-        data,
+      return this.stripPost(
+        await this.databases.createDocument<PostResponse>(
+          StorageService.DATABASE_ID,
+          StorageService.COLLECTION_ID,
+          slug as string,
+          data,
+        ),
       );
     } catch (e) {
       console.error('Appwrite service createPost()', e);
@@ -68,11 +85,13 @@ export class StorageService {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { $id, userId, slug: s, ...data } = post;
     try {
-      return await this.databases.updateDocument(
-        StorageService.DATABASE_ID,
-        StorageService.COLLECTION_ID,
-        slug,
-        data,
+      return this.stripPost(
+        await this.databases.updateDocument<PostResponse>(
+          StorageService.DATABASE_ID,
+          StorageService.COLLECTION_ID,
+          slug,
+          data,
+        ),
       );
     } catch (e) {
       console.error('Appwrite service updatePost()', e);
@@ -114,18 +133,19 @@ export class StorageService {
   }
 
   getFilePreview(fileId: string) {
-    return this.storage.getFilePreview(StorageService.BUCKET_ID, fileId);
+    return this.storage.getFileView(StorageService.BUCKET_ID, fileId);
+  }
+
+  /**
+   * Remove all appwrite-specific properties that start with $, apart from $id
+   * @param post
+   * @private
+   */
+  private stripPost(post: Post): Post {
+    return Object.fromEntries(
+      Object.entries(post).filter(([k]) => !k.startsWith('$') || k === '$id'),
+    ) as Post;
   }
 }
 
 export const storageService = StorageService.instance;
-
-export type Post = {
-  $id?: string;
-  slug?: string;
-  title: string;
-  content: string;
-  featuredImage?: string;
-  active?: boolean;
-  userId?: string;
-};

@@ -15,8 +15,6 @@ export function AuthLayout({
   const navigate = useNavigate();
   const isAuthenticated = useSelector(authSlice.selectors.authenticated);
 
-  // TODO remove
-  console.log(isAuthenticated, 'is authenticated');
   useEffect(() => {
     if (authentication && authentication !== isAuthenticated) {
       navigate('/login');
