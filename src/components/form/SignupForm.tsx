@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { ResolverResult, SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from '@reduxjs/toolkit';
 import { authService, UserRegistration } from '../../appwrite/auth';
@@ -8,11 +8,42 @@ import { Button } from '../Button';
 import { login } from '../../store/authSlice';
 import { Logo } from '../Logo';
 import { useState } from 'react';
+import { z } from 'zod';
+
+const schema = z
+  .object({
+    name: z.string().min(2),
+    email: z.string().email(),
+    password: z.string().min(8),
+  })
+  .required();
+
+async function resolver(data: UserRegistration) {
+  const parsed = schema.safeParse(data);
+  return {
+    values: parsed.success ? parsed.data : {},
+    errors: parsed.success
+      ? {}
+      : Object.fromEntries(
+          parsed.error.errors.map((zi) => [
+            zi.code + '-' + zi.path.join('.'),
+            {
+              message: zi.message,
+              type: zi.path.join('.'),
+            },
+          ]),
+        ),
+  } satisfies ResolverResult;
+}
 
 export function SignupForm() {
   const dispatch = useDispatch<Dispatch<ReturnType<typeof login>>>();
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm<UserRegistration>({});
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UserRegistration>({ resolver });
   const [error, setError] = useState('');
 
   const submit: SubmitHandler<UserRegistration> = async (data) => {
@@ -50,8 +81,25 @@ export function SignupForm() {
             Sign in
           </Link>
         </p>
-        {error && <p className="mt-8 text-center text-red-600">{error}</p>}
-        <form onSubmit={handleSubmit(submit)} className="mt-8">
+        {error && (
+          <p className="mt-8 text-center text-red-600 dark:text-red-300">
+            {error}
+          </p>
+        )}
+        {errors && (
+          <p className="mt-8 text-center text-red-600 dark:text-red-300">
+            {Object.entries(errors).map(([key, value]) => (
+              <span className="inline-block" key={key}>
+                {`${value.type}: ${value.message}`}
+              </span>
+            ))}
+          </p>
+        )}
+        <form
+          onSubmit={handleSubmit(submit)}
+          className="mt-8"
+          noValidate={true}
+        >
           <div className="">
             <Input
               label="Full Name"
