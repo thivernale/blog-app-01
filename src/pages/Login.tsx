@@ -1,3 +1,9 @@
+import { LoginForm } from '../components/form/LoginForm';
+
 export function Login() {
-  return <>login</>;
+  return (
+    <div className="py-8">
+      <LoginForm />
+    </div>
+  );
 }

@@ -1,3 +1,9 @@
+import { SignupForm } from '../components/form/SignupForm';
+
 export function Signup() {
-  return <></>;
+  return (
+    <div className="py-8">
+      <SignupForm />
+    </div>
+  );
 }

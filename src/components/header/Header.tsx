@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { authSlice } from '../../store/authSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { getNavItemParams } from '../../providers/Routes';
 import { Container } from '../container/Container';
 import { Logo } from '../Logo';
@@ -16,21 +16,27 @@ export function Header() {
         <nav className="flex">
           <div className="mr-4">
             <Link to={'/'}>
-              <Logo />
+              <Logo width="50px" />
             </Link>
           </div>
           <ul className="ml-auto flex">
             {getNavItemParams(isAuthenticated).map(
               (item) =>
                 item.active && (
-                  <li key={item.path} className="flex">
-                    {/*<NavLink to={item.path}>{item.label}</NavLink>*/}
-                    <button
-                      onClick={() => navigate(item.path)}
-                      className="inline-block rounded-full px-6 py-2 duration-200 hover:bg-blue-100"
+                  <li key={item.path} className="flex align-middle">
+                    <NavLink
+                      to={item.path}
+                      className={({ isActive }) =>
+                        isActive ? 'font-bold' : undefined
+                      }
                     >
-                      {item.label}
-                    </button>
+                      <button
+                        onClick={() => navigate(item.path)}
+                        className="inline-block rounded-full px-6 py-2 duration-200 hover:bg-blue-100"
+                      >
+                        {item.label}
+                      </button>
+                    </NavLink>
                   </li>
                 ),
             )}
