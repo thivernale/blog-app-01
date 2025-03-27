@@ -1,9 +1,8 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useCallback, useEffect } from 'react';
 import { Post, storageService } from '../../appwrite/storage';
-import { authSlice } from '../../store/authSlice';
+import { useAppSelector } from '../../store/hooks';
 import { Input } from '../Input';
 import { RTE } from '../RTE';
 import { Button } from '../Button';
@@ -24,7 +23,7 @@ export function PostForm({ post }: { post?: Post }) {
     });
 
   const navigate = useNavigate();
-  const userData = useSelector(authSlice.selectors.userData);
+  const userData = useAppSelector(({ auth }) => auth.userData);
 
   const submit: SubmitHandler<PostWithFile> = async (data) => {
     const { image, ...postData } = data;

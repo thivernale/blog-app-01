@@ -1,7 +1,6 @@
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { authSlice } from '../store/authSlice';
+import { useAppSelector } from '../store/hooks';
 
 function Loading() {
   return <>Loading...</>;
@@ -13,7 +12,7 @@ export function AuthLayout({
 }: PropsWithChildren<{ authentication?: boolean }>) {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const isAuthenticated = useSelector(authSlice.selectors.authenticated);
+  const isAuthenticated = useAppSelector(({ auth }) => auth.authenticated);
 
   useEffect(() => {
     if (authentication && authentication !== isAuthenticated) {

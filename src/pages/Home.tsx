@@ -1,10 +1,9 @@
-import { useSelector } from 'react-redux';
-import { authSlice } from '../store/authSlice';
-import { Container } from '../components/container/Container';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../store/hooks';
+import { Container } from '../components/container/Container';
 
 export function Home() {
-  const userData = useSelector(authSlice.selectors.userData);
+  const userData = useAppSelector(({ auth }) => auth.userData);
 
   return (
     <div className="py-8">

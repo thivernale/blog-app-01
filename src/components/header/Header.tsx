@@ -1,14 +1,13 @@
-import { useSelector } from 'react-redux';
-import { authSlice } from '../../store/authSlice';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { getNavItemParams } from '../../providers/Routes';
+import { useAppSelector } from '../../store/hooks';
 import { Container } from '../container/Container';
 import { Logo } from '../Logo';
 import { LogoutButton } from './LogoutButton';
 
 export function Header() {
   const navigate = useNavigate();
-  const isAuthenticated = useSelector(authSlice.selectors.authenticated);
+  const isAuthenticated = useAppSelector(({ auth }) => auth.authenticated);
 
   return (
     <header className="bg-gray-500 py-3 shadow">

@@ -1,16 +1,15 @@
 import { Link } from 'react-router-dom';
-import { Button } from '../components/Button';
 import { useEffect, useState } from 'react';
+import { useAppSelector } from '../store/hooks';
+import { Query } from 'appwrite';
 import { Post, storageService } from '../appwrite/storage';
 import { Container } from '../components/container/Container';
+import { Button } from '../components/Button';
 import { Card } from '../components/Card';
-import { Query } from 'appwrite';
-import { useSelector } from 'react-redux';
-import { authSlice } from '../store/authSlice';
 
 export function AllPosts() {
   const [posts, setPosts] = useState<Post[]>([]);
-  const userData = useSelector(authSlice.selectors.userData);
+  const userData = useAppSelector(({ auth }) => auth.userData);
 
   useEffect(() => {
     storageService

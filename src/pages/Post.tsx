@@ -1,9 +1,8 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 import { type Post, storageService } from '../appwrite/storage';
-import { authSlice } from '../store/authSlice';
+import { useAppSelector } from '../store/hooks';
 import { Container } from '../components/container/Container';
 import { Button } from '../components/Button';
 
@@ -11,7 +10,7 @@ export function Post() {
   const { slug } = useParams();
   const [post, setPost] = useState<Post | null>(null);
   const navigate = useNavigate();
-  const userData = useSelector(authSlice.selectors.userData);
+  const userData = useAppSelector(({ auth }) => auth.userData);
 
   const isAuthor = post && userData && post.userId === userData.$id;
 

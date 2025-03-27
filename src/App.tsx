@@ -1,15 +1,14 @@
 import './App.css';
+import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header } from './components/header/Header';
 import { Footer } from './components/footer/Footer';
 import { authService } from './appwrite/auth';
+import { useAppDispatch } from './store/hooks';
 import { login } from './store/authSlice';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Dispatch } from '@reduxjs/toolkit';
 
 function App() {
-  const dispatch = useDispatch<Dispatch<ReturnType<typeof login>>>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     authService.getCurrentUser().then((userData) => {

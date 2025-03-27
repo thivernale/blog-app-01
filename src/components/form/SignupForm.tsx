@@ -1,13 +1,12 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ResolverResult, SubmitHandler, useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { Dispatch } from '@reduxjs/toolkit';
-import { authService, UserRegistration } from '../../appwrite/auth';
+import { useAppDispatch } from '../../store/hooks';
+import { login } from '../../store/authSlice';
+import { authService, type UserRegistration } from '../../appwrite/auth';
 import { Input } from '../Input';
 import { Button } from '../Button';
-import { login } from '../../store/authSlice';
 import { Logo } from '../Logo';
-import { useState } from 'react';
 import { z } from 'zod';
 
 const schema = z
@@ -37,7 +36,7 @@ async function resolver(data: UserRegistration) {
 }
 
 export function SignupForm() {
-  const dispatch = useDispatch<Dispatch<ReturnType<typeof login>>>();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {
     register,

@@ -1,16 +1,15 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { Dispatch } from '@reduxjs/toolkit';
 import { authService, UserCredentials } from '../../appwrite/auth';
+import { useAppDispatch } from '../../store/hooks';
+import { login } from '../../store/authSlice';
 import { Input } from '../Input';
 import { Button } from '../Button';
-import { login } from '../../store/authSlice';
 import { Logo } from '../Logo';
-import { useState } from 'react';
 
 export function LoginForm() {
-  const dispatch = useDispatch<Dispatch<ReturnType<typeof login>>>();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm<UserCredentials>({});
   const [error, setError] = useState('');

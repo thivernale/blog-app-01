@@ -1,10 +1,9 @@
-import { useDispatch } from 'react-redux';
-import { Dispatch } from '@reduxjs/toolkit';
 import { logout } from '../../store/authSlice';
+import { useAppDispatch } from '../../store/hooks';
 import { authService } from '../../appwrite/auth';
 
 export function LogoutButton() {
-  const dispatch = useDispatch<Dispatch<ReturnType<typeof logout>>>();
+  const dispatch = useAppDispatch();
 
   function handleLogout() {
     authService.logout().then(() => {
